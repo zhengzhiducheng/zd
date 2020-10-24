@@ -4,7 +4,7 @@
 		<NavBar :right-text="isedit?'完成':'编辑'" 
 			title="购物车" :statusBar="true" :fixed="true"
 			@click-right="isedit = !isedit"
-			:shadow="false" left-text="返回"></NavBar>
+			:shadow="false" left-text="返回" color="#ffffff"></NavBar>
 		<view class="car">
 			<CrossLine height="20upx"></CrossLine>
 			<view class="" >

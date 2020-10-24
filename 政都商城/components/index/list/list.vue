@@ -25,7 +25,9 @@ export default {
   props:['listData'],
   methods: {
     goDetail(item, index) {
-      console.log(item, index);
+		uni.navigateTo({
+			url:"/pages/detail/detail"
+		})
     }
   }
 };

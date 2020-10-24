@@ -57,7 +57,8 @@
 				//"navigationBarTitleText": "uni-app",
 				"navigationStyle":"custom",
 				"app-plus":{
-					"bounce":"none"
+					"bounce":"none",
+					"titleNView":false
 				}
 			}
 		},
