@@ -1,6 +1,6 @@
 <template>
 	<view class="position-relative d-flex a-center animated fadeIn faster" style="height: 320upx;">
-		<view class="icon iconfont uni-icon-scan position-absolute line-h text-white"
+		<view class="icon iconfont icon-buoumaotubiao46 position-absolute line-h text-white"
 		style="z-index: 100;right: 20upx; top: 72upx;font-size: 50upx;"
 		@tap="openMsgList"></view>
 		<!-- 背景图 -->
@@ -27,7 +27,9 @@
 	export default {
 		methods: {
 			openMsgList() {
-				console.log(1)
+				uni.navigateTo({
+					url:"/pages/userSet/userSet"
+				})
 			}
 		},
 	}

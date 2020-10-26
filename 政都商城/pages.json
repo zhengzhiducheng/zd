@@ -1,7 +1,91 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
+	"pages": [ 
+		{ // 首页
 			"path": "pages/index/index",
+			"style": {
+				 "app-plus":{
+				 	"titleNView":false
+				 }
+			}
+		},
+		{ // 修改个人信息
+			"path": "pages/updataInfo/updataInfo",
+			"style": {
+				 "app-plus":{
+				 	"titleNView":false
+				 }
+			}
+		},
+		{ // 收货地址
+			"path": "pages/userPath/userPath",
+			"style" : {
+				"navigationBarTitleText":"地址列表",
+				"app-plus":{
+					"scrollIndicator":"none",
+					"titleNView":false
+				}
+			}
+		},
+		{
+			"path":"pages/addressEeditor/addressEeditor",
+			"style" : {
+				"navigationBarTitleText":"地址编辑",
+				"app-plus":{
+					"scrollIndicator":"none",
+					"titleNView":false
+				}
+			}
+		},
+		{ // 用户资料
+			"path": "pages/userData/userData",
+			"style": {
+				 "app-plus":{
+				 	"titleNView":false
+				 }
+			}
+		},
+		{ // 用户资料 加好友
+			"path": "pages/userhome/userhome",
+			"style": {
+				 "app-plus":{
+				 	"titleNView":false
+				 }
+			}
+		},
+		{ // 聊天
+			"path": "pages/chat/chat",
+			"style": {
+				 "app-plus":{
+				 	"titleNView":false
+				 }
+			}
+		},
+		{ // 搜索人
+			"path": "pages/searchMan/searchMan",
+			"style": {
+				 "app-plus":{
+				 	"titleNView":false
+				 }
+			}
+		},
+		{	//登录
+			"path": "pages/signin/signin",
+			"style": {
+				 "app-plus":{
+				 	"titleNView":false
+				 }
+			}
+		},
+		{	// 注册
+			"path": "pages/signup/signup",
+			"style": {
+				 "app-plus":{
+				 	"titleNView":false
+				 }
+			}
+		},
+		{
+			"path": "pages/userSet/userSet",
 			"style": {
 				 "app-plus":{
 				 	"titleNView":false

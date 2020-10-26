@@ -1,10 +1,19 @@
 <template>
 	<view class="message">
+		<CrossLine height="120upx"></CrossLine>
 		<!-- 顶部导航 -->
-		<NavBar right-text="选项" color="#ffffff"
-			title="消息" :statusBar="true" :fixed="true"
-			:shadow="false" left-text="返回"></NavBar>
-			<CrossLine height="20upx"></CrossLine>
+		<view class="top-bar">
+			<view class="left">
+				消息
+			</view>
+			<view class="top-bar-center">
+				
+			</view>
+			<view class="top-bar-right">
+				<view class="search" @click="toSearch"><image src="/static/static_public_img/search.png"></image></view>
+				<view class="add"><image src="/static/static_public_img/add.png"></image></view>
+			</view>
+		</view>
 		<view class="top">
 			<!-- 列表 -->
 			<view class="main">
@@ -24,7 +33,7 @@
 					</view>
 				</view>
 				<view class="friends">
-					<view class="friend-list" v-for="(item,index) in friends" :key="index">
+					<view class="friend-list" v-for="(item,index) in friends" :key="index" @click="goChat">
 						<view class="friend-list-l">
 							<text class="tip" v-if="item.tip>0">{{item.tip}}</text>
 							<image :src="item.imgurl"></image>
@@ -46,12 +55,10 @@
 
 <script>
 	import Tool from '@/common/tool/index.js'
-	import NavBar from "@/components/navBar/navBar.vue"
 	import Tabbar from "@/components/tabbar/tabbar.vue"
 	export default{
 		components:{
-			Tabbar,
-			NavBar
+			Tabbar
 		},
 		data() {
 			return {
@@ -87,6 +94,16 @@
 			}
 		},
 		methods:{
+			toSearch(){
+				uni.navigateTo({
+					url:'/pages/searchMan/searchMan'
+				})
+			},
+			goChat(){
+				uni.navigateTo({
+					url:"/pages/chat/chat"
+				})
+			},
 			dateTime(d){
 				return Tool.dateTime(d)
 			}
@@ -119,8 +136,14 @@
 	// 
 	
 		.top-bar{
+			padding-top: 30upx;
 			background:rgba(255,255,255,0.96);
 			border-bottom:1px solid $uni-border-color;
+		}
+		.left{
+			padding-left: 30upx;
+			padding-top: 20upx;
+			font-size: 30upx;
 		}
 		.main{
 			padding-bottom: $uni-spacing-col-base;

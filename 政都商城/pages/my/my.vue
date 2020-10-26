@@ -34,8 +34,9 @@
 			otherIcon="icon-service" title="服务中心"></ListItem>
 			<ListItem showExtraIcon otherIconStyle="color:#FE8B42;"
 			otherIcon="icon-home" title="小米之家"></ListItem>
+			<CrossLine height="2upx" background="#cccccc"></CrossLine>
 			<ListItem showExtraIcon otherIconStyle="color:#FDBF2E;"
-			otherIcon="icon-VIP" title="小米会员"></ListItem>
+			otherIcon="icon-share" title="意见反馈"></ListItem>
 		</view>
 		<Tabbar></Tabbar>
 	</view>
