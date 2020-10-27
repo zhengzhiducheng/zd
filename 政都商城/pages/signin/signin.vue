@@ -2,48 +2,70 @@
 	<view class="content">
 		<view class="top-bar">
 			<view class="top-bar-center"></view>
-			<view class="top-bar-right" @tap="toSignUp">
-				<CrossLine height="20upx"></CrossLine>
-				<view class="text">去注册</view>
-			</view>
 		</view>
 		<view class="logo">
-			<image src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/uni-h5-hosting-qr.png" @tap="testFun1"></image>
+			<image src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/uni-h5-hosting-qr.png"></image>
 		</view>
 		<view class="main">
 			<view class="title">登录</view>
 			<view class="slogan">您好，欢迎来到 政都易购！</view>
 			<view class="inputs">
 				<input type="text" 
-					v-model="user" placeholder="邮箱" 
-					class="user" placeholder-style="color:#aaa;font-weight:400;" @blur="getUser"/>
-				<input type="password" placeholder="密码" 
-					class="psw" placeholder-style="color:#aaa;font-weight:400;" @blur="getPsw"/>
+					v-model="email" placeholder="邮箱" 
+					class="user" placeholder-style="color:#aaa;font-weight:400;"/>
+				<input v-model="psw"
+				type="password" placeholder="密码" 
+					class="psw" placeholder-style="color:#aaa;font-weight:400;"/>
 			</view>
 			<!-- <view class="tips">输入用户或密码错误！</view> -->
 		</view>
-		<view class="submit" @tap="testFun">登录</view>
+		<view class="top-bar-right">
+			<CrossLine height="20upx"></CrossLine>
+			<view class="d-flex j-sb px-2">
+				<text @tap="forgetWord"  v-once>忘记密码</text>
+				<text @click="toSignUp">去注册</text>
+			</view>
+		</view>
+		<view class="submit" @click="login">登录</view>
 	</view>
 </template>
 
 <script>
+	import Ajax from "@/common/lib/requset.js"
 	export default {
 		data() {
 			return {
-				user:'',
-				psw:'',
+				email:'',
+				psw:''
 			}
 		},
 		methods: {
-			//后台链接测试
-			bbb: function(){
-				console.log(this.user);
-			},
-			testFun: function(){
-				console.log(1)
-			},
-			testFun1: function(){
-				console.log(1)
+			// 忘记密码
+			async forgetWord(){
+				let {email} = this
+				if(email){
+					let result = await Ajax.request({
+						url:"/from/forgetWord",
+						method:"POST",
+						data:{email}
+					})
+					if(result.code == 0){
+						uni.showToast({
+						    title: result.data,
+						    duration: 2000
+						});
+					}else{
+						uni.showToast({
+						    title: result.data,
+						    duration: 2000
+						});
+					}
+				}else{
+					uni.showToast({
+					    title: "请输入邮箱账号",
+					    duration: 2000
+					});
+				}
 			},
 			//跳转到注册页面
 			toSignUp: function(){
@@ -51,20 +73,39 @@
 				    url: '../signup/signup',
 				});
 			},
-			//获取用户名/邮箱
-			getUser: function(e){
-				this.user = e.detail.value;
-			},
-			//获取密码
-			getPsw: function(e){
-				this.psw = e.detail.value;
-			},
-			
 			//登录提交
-			login: function(){
-				if(this.user && this.psw){
-					console.log('提交')
+			async login(){
+				let {email,psw} = this
+				if(email && psw){
+					let result = await Ajax.request({
+						url:"/from/login",
+						method:"POST",
+						data:{email,psw},
+					})
+					if(result.code == 0){
+						this.email = this.psw = ''
+						uni.showToast({
+						    title: "登陆成功",
+						    duration: 2000
+						});
+						this.$store.commit("setUserInfo",result.data)
+						setTimeout(()=>{
+							uni.navigateTo({
+								url:"/pages/index/index"
+							})
+						},2000)
+					}else{
+						uni.showToast({
+						    title: "填写错误",
+						    duration: 2000
+						});
+						setTimeout(()=>{
+							this.email = this.psw = ''
+						},2000)
+					}
+					
 				}
+			
 			}
 			
 		}
@@ -82,8 +123,14 @@
 			margin: 0 auto;
 		}
 	}
+	.top-bar-right{
+		text-align: right;
+		padding-right: 20upx;
+		margin-bottom: 20upx;
+	}
 	.main{
 		padding: 54rpx $uni-spacing-row-lg 120rpx;
+		padding-bottom: 0;
 		//width: 100%;
 		.title{
 			font-size:56rpx;

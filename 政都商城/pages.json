@@ -1,5 +1,13 @@
 {
 	"pages": [ 
+		{	//登录
+			"path": "pages/signin/signin",
+			"style": {
+				 "app-plus":{
+				 	"titleNView":false
+				 }
+			}
+		},
 		{ // 首页
 			"path": "pages/index/index",
 			"style": {
@@ -62,14 +70,6 @@
 		},
 		{ // 搜索人
 			"path": "pages/searchMan/searchMan",
-			"style": {
-				 "app-plus":{
-				 	"titleNView":false
-				 }
-			}
-		},
-		{	//登录
-			"path": "pages/signin/signin",
 			"style": {
 				 "app-plus":{
 				 	"titleNView":false

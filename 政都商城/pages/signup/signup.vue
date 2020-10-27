@@ -1,11 +1,6 @@
 <template>
 	<view class="content">
-		<view class="top-bar">
-			<view class="top-bar-left" @tap="backOne" style="font-size:30upx;">
-				<CrossLine height="30upx"></CrossLine>
-				去登录
-			</view>
-		</view>
+		<view class="top-bar"></view>
 		<view class="logo">
 			<image src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/uni-h5-hosting-qr.png"></image>
 		</view>
@@ -29,11 +24,19 @@
 				</view>
 			</view>
 		</view>
-		<view :class="[{submit:isok},{submit1:!isok}]">注册</view>
+		<view class="goLogin">
+			<CrossLine height="30upx" ></CrossLine>
+			<text @tap="backOne">
+				去登录
+			</text>
+			
+		</view>
+		<view class="submit" @click="register">注册</view>
 	</view>
 </template>
 
 <script>
+	import Ajax from "@/common/lib/requset.js"
 	export default {
 		data() {
 			return {
@@ -52,6 +55,41 @@
 			}
 		},
 		methods: {
+			// 注册
+			async register(){
+				let {email,user,psw,isuser,isemail} = this
+				if(isuser&&isemail&&psw.length){
+					// 发送请求提交
+					let res = await Ajax.request({
+						url:"/from/register",
+						method:"POST",
+						data:{email,user,psw},
+					})
+					if(res.code == 0){
+						this.email = this.user = this.psw = ''
+						uni.showToast({
+						    title: res.data,
+						    duration: 2000
+						});
+						setTimeout(()=>{
+							uni.navigateTo({
+								url:"/pages/signin/signin"
+							})
+						},2000)
+						
+					}else{
+						uni.showToast({
+						    title: res.data,
+						    duration: 2000
+						});
+						setTimeout(()=>{
+							uni.navigateTo({
+								url:"/pages/signup/signup"
+							})
+						},2000)
+					}
+				}
+			},
 			//密码显示隐藏
 			looks: function(){
 				if(this.look){
@@ -127,8 +165,15 @@
 			margin: 0 auto;
 		}
 	}
+	.goLogin{
+		font-size:30upx;
+		text-align: right;
+		margin-bottom: 20upx;
+		padding-right: 20upx;
+	}
 	.main{
 		padding: 54rpx $uni-spacing-row-lg 120rpx;
+		padding-bottom: 0;
 		//width: 100%;
 		.title{
 			font-size:56rpx;
